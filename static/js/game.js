@@ -196,16 +196,18 @@ class Game {
 
     async _load() {
         try {
-            const resp = await fetch('/api/characters');
-            const json = await resp.json();
-            if (!json.success) throw new Error('Server error');
+            const resp = await fetch('./characters.json');
+            const raw  = await resp.json();
+            // Support both flat JSON (GitHub Pages) and { success, data } wrapper (Flask API)
+            const data = raw.player_team ? raw : raw.data;
+            if (!data?.player_team) throw new Error('Invalid character data');
 
-            this.teamData = json.data;
-            this.playerTeam = json.data.player_team.characters.map(c => new Character(c));
-            this.enemyTeam  = json.data.enemy_team.characters.map(c => new Character(c));
+            this.teamData   = data;
+            this.playerTeam = data.player_team.characters.map(c => new Character(c));
+            this.enemyTeam  = data.enemy_team.characters.map(c => new Character(c));
             this._loaded = true;
 
-            await new Promise(r => setTimeout(r, 400)); // let bar reach 100%
+            await new Promise(r => setTimeout(r, 400));
 
             document.getElementById('loading-screen').classList.add('hidden');
             document.getElementById('game-screen').classList.remove('hidden');
@@ -213,11 +215,7 @@ class Game {
             this._renderAll();
             this._setupInput();
 
-            if (!json.from_image) {
-                this._log('📋 デフォルトキャラクターを使用 (AI解析不可)', 'system');
-            } else {
-                this._log('🤖 AI が画像からキャラクターを生成しました！', 'special');
-            }
+            this._log('🤖 AI が画像からキャラクターを認識しました！', 'special');
             this._log('⚔️ バトル開始！ Fewline Force vs Canine Coalition!', 'special');
             this._log('🐱 キャラクター選択: 1〜5 キー or クリック　スキル: Q/W/E/R', 'system');
 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fewline Force vs Canine Coalition</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+    <div class="loading-box">
+        <div class="loading-title">⚔️ BATTLE LOADING ⚔️</div>
+        <div class="loading-subtitle">AI が画像を解析してキャラクターを生成中...</div>
+        <div class="loading-bar-bg">
+            <div class="loading-bar-fill" id="loading-bar"></div>
+        </div>
+        <div class="loading-status" id="loading-status">Analyzing battle scene...</div>
+    </div>
+</div>
+
+<!-- Game Screen -->
+<div id="game-screen" class="hidden">
+
+    <!-- Teams Row -->
+    <div id="teams-row">
+        <div id="player-side">
+            <div class="team-label player-label" id="player-team-name">🐱 FEWLINE FORCE</div>
+            <div class="portraits-row" id="player-portraits"></div>
+        </div>
+        <div id="vs-area">⚔️</div>
+        <div id="enemy-side">
+            <div class="team-label enemy-label" id="enemy-team-name">🐕 CANINE COALITION</div>
+            <div class="portraits-row" id="enemy-portraits"></div>
+        </div>
+    </div>
+
+    <!-- Battle Area -->
+    <div id="battle-area">
+        <div id="battle-log">
+            <div id="battle-messages"></div>
+        </div>
+    </div>
+
+    <!-- HUD -->
+    <div id="hud">
+        <div id="char-status">
+            <div id="char-header">
+                <span id="char-name">---</span>
+                <span id="char-class"></span>
+            </div>
+            <div class="bar-row">
+                <span class="bar-label">HP</span>
+                <div class="bar-bg"><div id="hp-bar" class="bar hp-bar"></div></div>
+                <span class="bar-val" id="hp-text">0/0</span>
+            </div>
+            <div class="bar-row">
+                <span class="bar-label">MP</span>
+                <div class="bar-bg"><div id="mp-bar" class="bar mp-bar"></div></div>
+                <span class="bar-val" id="mp-text">0/0</span>
+            </div>
+        </div>
+
+        <div id="combo-area">
+            <div class="combo-label">COMBO</div>
+            <div id="combo-pips">
+                <div class="pip" id="pip-1"></div>
+                <div class="pip" id="pip-2"></div>
+                <div class="pip" id="pip-3"></div>
+                <div class="pip" id="pip-4"></div>
+                <div class="pip" id="pip-5"></div>
+            </div>
+            <div id="combo-count">x0</div>
+        </div>
+
+        <div id="action-bar">
+            <div class="skill-btn" id="skill-Q" data-key="Q">
+                <div class="skill-hotkey">Q</div>
+                <div class="skill-name">—</div>
+                <div class="skill-mp">Free</div>
+            </div>
+            <div class="skill-btn" id="skill-W" data-key="W">
+                <div class="skill-hotkey">W</div>
+                <div class="skill-name">—</div>
+                <div class="skill-mp">Free</div>
+            </div>
+            <div class="skill-btn" id="skill-E" data-key="E">
+                <div class="skill-hotkey">E</div>
+                <div class="skill-name">—</div>
+                <div class="skill-mp">Free</div>
+            </div>
+            <div class="skill-btn" id="skill-R" data-key="R">
+                <div class="skill-hotkey">R</div>
+                <div class="skill-name">—</div>
+                <div class="skill-mp">Free</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="turn-bar">
+        <div id="turn-text">キャラクターを選択してください (1〜5 キー or クリック)</div>
+    </div>
+
+</div>
+
+<!-- Victory / Defeat overlays -->
+<div id="victory-screen" class="overlay hidden">
+    <div class="overlay-box">
+        <div class="overlay-icon">🏆</div>
+        <h1>VICTORY!</h1>
+        <p>Fewline Force が勝利した！</p>
+        <button onclick="location.reload()">もう一度プレイ</button>
+    </div>
+</div>
+
+<div id="defeat-screen" class="overlay hidden">
+    <div class="overlay-box">
+        <div class="overlay-icon">💀</div>
+        <h1>DEFEAT</h1>
+        <p>Canine Coalition の勝ち...</p>
+        <button onclick="location.reload()">リトライ</button>
+    </div>
+</div>
+
+<script src="./static/js/game.js"></script>
+</body>
+</html>
