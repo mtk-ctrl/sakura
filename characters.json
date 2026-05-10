@@ -1,0 +1,167 @@
+{
+  "player_team": {
+    "name": "Fewline Force",
+    "description": "画像から識別された精鋭の猫戦士チーム",
+    "characters": [
+      {
+        "id": "ironpaw",
+        "name": "Ironpaw",
+        "animal": "Tabby Cat",
+        "class": "Warrior",
+        "emoji": "🔨",
+        "color": "#8B7355",
+        "hp": 125, "max_hp": 125,
+        "mp": 40, "max_mp": 40,
+        "atk": 20, "def": 16, "spd": 9,
+        "skills": [
+          {"key": "Q", "name": "Hammer Strike", "damage": 32, "mp_cost": 0, "type": "physical", "hits": 1, "description": "戦鎚の一撃"},
+          {"key": "W", "name": "Whirlwind Smash", "damage": 20, "mp_cost": 15, "type": "physical", "hits": 3, "description": "全敵に回転打撃"},
+          {"key": "E", "name": "Iron Guard", "damage": 0, "mp_cost": 10, "type": "support", "hits": 0, "description": "3ターン防御力UP"},
+          {"key": "R", "name": "Crushing Blow", "damage": 60, "mp_cost": 28, "type": "physical", "hits": 1, "description": "渾身の大打撃"}
+        ]
+      },
+      {
+        "id": "luna",
+        "name": "Luna",
+        "animal": "White Cat",
+        "class": "Mage",
+        "emoji": "✨",
+        "color": "#6699CC",
+        "hp": 68, "max_hp": 68,
+        "mp": 95, "max_mp": 95,
+        "atk": 24, "def": 6, "spd": 15,
+        "skills": [
+          {"key": "Q", "name": "Frost Bolt", "damage": 30, "mp_cost": 10, "type": "magic", "hits": 1, "description": "氷の魔法弾"},
+          {"key": "W", "name": "Blizzard", "damage": 22, "mp_cost": 30, "type": "magic", "hits": 3, "description": "吹雪で全敵を攻撃"},
+          {"key": "E", "name": "Arcane Shield", "damage": 0, "mp_cost": 20, "type": "support", "hits": 0, "description": "3ターン魔法バリア"},
+          {"key": "R", "name": "Arcane Nova", "damage": 70, "mp_cost": 42, "type": "magic", "hits": 1, "description": "大魔法爆発"}
+        ]
+      },
+      {
+        "id": "shadow",
+        "name": "Shadow",
+        "animal": "Black Cat",
+        "class": "Archer",
+        "emoji": "🏹",
+        "color": "#334455",
+        "hp": 78, "max_hp": 78,
+        "mp": 62, "max_mp": 62,
+        "atk": 21, "def": 8, "spd": 22,
+        "skills": [
+          {"key": "Q", "name": "Shadow Arrow", "damage": 26, "mp_cost": 0, "type": "physical", "hits": 1, "description": "闇から放つ矢"},
+          {"key": "W", "name": "Arrow Rain", "damage": 16, "mp_cost": 22, "type": "physical", "hits": 4, "description": "全敵に矢の雨"},
+          {"key": "E", "name": "Smoke Screen", "damage": 0, "mp_cost": 15, "type": "support", "hits": 0, "description": "3ターン回避率UP"},
+          {"key": "R", "name": "Deadeye Shot", "damage": 72, "mp_cost": 32, "type": "physical", "hits": 1, "description": "必殺の狙撃"}
+        ]
+      },
+      {
+        "id": "wildfire",
+        "name": "Wildfire",
+        "animal": "Wildcat",
+        "class": "Berserker",
+        "emoji": "🐆",
+        "color": "#CC4400",
+        "hp": 102, "max_hp": 102,
+        "mp": 28, "max_mp": 28,
+        "atk": 26, "def": 9, "spd": 17,
+        "skills": [
+          {"key": "Q", "name": "Wild Claw", "damage": 36, "mp_cost": 0, "type": "physical", "hits": 1, "description": "鋭い爪の攻撃"},
+          {"key": "W", "name": "Frenzy Combo", "damage": 20, "mp_cost": 15, "type": "physical", "hits": 3, "description": "全敵に連続爪攻撃"},
+          {"key": "E", "name": "Berserk", "damage": 0, "mp_cost": 0, "type": "support", "hits": 0, "description": "3ターン攻撃力大UP"},
+          {"key": "R", "name": "Raging Storm", "damage": 58, "mp_cost": 24, "type": "physical", "hits": 2, "description": "野性の嵐"}
+        ]
+      },
+      {
+        "id": "whisker",
+        "name": "Whisker",
+        "animal": "Gray Cat",
+        "class": "Healer",
+        "emoji": "💚",
+        "color": "#336633",
+        "hp": 72, "max_hp": 72,
+        "mp": 82, "max_mp": 82,
+        "atk": 12, "def": 13, "spd": 17,
+        "skills": [
+          {"key": "Q", "name": "Quick Scratch", "damage": 18, "mp_cost": 0, "type": "physical", "hits": 1, "description": "素早い引っかき"},
+          {"key": "W", "name": "Heal", "damage": -38, "mp_cost": 22, "type": "heal", "hits": 1, "description": "最もHPの少ない仲間を回復"},
+          {"key": "E", "name": "Rally Cry", "damage": 0, "mp_cost": 26, "type": "support", "hits": 0, "description": "3ターン全体攻撃力UP"},
+          {"key": "R", "name": "Full Restore", "damage": -72, "mp_cost": 42, "type": "heal", "hits": 1, "description": "大回復"}
+        ]
+      }
+    ]
+  },
+  "enemy_team": {
+    "name": "Canine Coalition",
+    "description": "画像から識別された精鋭の犬戦士チーム",
+    "characters": [
+      {
+        "id": "rex",
+        "name": "Rex",
+        "animal": "German Shepherd",
+        "class": "Swordsman",
+        "emoji": "🗡️",
+        "color": "#8B6914",
+        "hp": 115, "max_hp": 115,
+        "mp": 52, "max_mp": 52,
+        "atk": 20, "def": 14, "spd": 13,
+        "skills": [
+          {"key": "Q", "name": "Blade Slash", "damage": 30, "mp_cost": 0, "type": "physical", "hits": 1, "description": "鋭い剣撃"},
+          {"key": "W", "name": "Cross Cut", "damage": 22, "mp_cost": 16, "type": "physical", "hits": 2, "description": "二段斬り"},
+          {"key": "E", "name": "Steel Guard", "damage": 0, "mp_cost": 10, "type": "support", "hits": 0, "description": "防御力UP"},
+          {"key": "R", "name": "Final Strike", "damage": 65, "mp_cost": 32, "type": "physical", "hits": 1, "description": "渾身の一撃"}
+        ]
+      },
+      {
+        "id": "ember",
+        "name": "Ember",
+        "animal": "Shiba Inu",
+        "class": "Fire Warrior",
+        "emoji": "🔥",
+        "color": "#CC6600",
+        "hp": 96, "max_hp": 96,
+        "mp": 48, "max_mp": 48,
+        "atk": 18, "def": 11, "spd": 18,
+        "skills": [
+          {"key": "Q", "name": "Fire Bite", "damage": 27, "mp_cost": 0, "type": "physical", "hits": 1, "description": "炎の噛みつき"},
+          {"key": "W", "name": "Flame Dash", "damage": 36, "mp_cost": 20, "type": "physical", "hits": 1, "description": "炎を纏って突進"},
+          {"key": "E", "name": "Ember Howl", "damage": 16, "mp_cost": 12, "type": "magic", "hits": 3, "description": "全敵に炎の遠吠え"},
+          {"key": "R", "name": "Inferno Rage", "damage": 58, "mp_cost": 36, "type": "physical", "hits": 1, "description": "爆炎の一撃"}
+        ]
+      },
+      {
+        "id": "flash",
+        "name": "Flash",
+        "animal": "Greyhound",
+        "class": "Scout",
+        "emoji": "⚡",
+        "color": "#888899",
+        "hp": 74, "max_hp": 74,
+        "mp": 56, "max_mp": 56,
+        "atk": 17, "def": 7, "spd": 26,
+        "skills": [
+          {"key": "Q", "name": "Lightning Bite", "damage": 22, "mp_cost": 0, "type": "physical", "hits": 1, "description": "電光の噛みつき"},
+          {"key": "W", "name": "Blitz", "damage": 16, "mp_cost": 16, "type": "physical", "hits": 3, "description": "全敵に高速攻撃"},
+          {"key": "E", "name": "Evasive Dash", "damage": 0, "mp_cost": 10, "type": "support", "hits": 0, "description": "3ターン回避率大UP"},
+          {"key": "R", "name": "Sonic Rush", "damage": 52, "mp_cost": 26, "type": "physical", "hits": 2, "description": "音速の突撃"}
+        ]
+      },
+      {
+        "id": "bruno",
+        "name": "Bruno",
+        "animal": "St. Bernard",
+        "class": "Support",
+        "emoji": "🛡️",
+        "color": "#8B4513",
+        "hp": 108, "max_hp": 108,
+        "mp": 72, "max_mp": 72,
+        "atk": 14, "def": 18, "spd": 8,
+        "skills": [
+          {"key": "Q", "name": "Heavy Paw", "damage": 24, "mp_cost": 0, "type": "physical", "hits": 1, "description": "重い前足の一撃"},
+          {"key": "W", "name": "Field Medic", "damage": -32, "mp_cost": 22, "type": "heal", "hits": 1, "description": "仲間を回復"},
+          {"key": "E", "name": "Fortress", "damage": 0, "mp_cost": 26, "type": "support", "hits": 0, "description": "全体防御力UP"},
+          {"key": "R", "name": "Pack Revival", "damage": -60, "mp_cost": 38, "type": "heal", "hits": 1, "description": "仲間を大回復"}
+        ]
+      }
+    ]
+  }
+}

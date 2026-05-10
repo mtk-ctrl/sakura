@@ -1,0 +1,272 @@
+:root {
+    --bg:       #08081a;
+    --bg2:      #10102a;
+    --panel:    #18183a;
+    --border:   #2a2a55;
+    --gold:     #ffd700;
+    --gold2:    #b89010;
+    --hp:       #22dd44;
+    --hp-low:   #ff3333;
+    --mp:       #4499ff;
+    --combo:    #ff9900;
+    --enemy:    #ff5533;
+    --text:     #dde0ff;
+    --muted:    #8888bb;
+    --heal:     #66ff88;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+/* ── Loading ─────────────────────────────── */
+#loading-screen {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+}
+.loading-box { text-align: center; max-width: 480px; padding: 20px; }
+.loading-title {
+    font-size: 2rem; font-weight: bold;
+    color: var(--gold);
+    text-shadow: 0 0 24px rgba(255,215,0,.6);
+    margin-bottom: 12px;
+}
+.loading-subtitle { color: var(--muted); font-size: .9rem; margin-bottom: 20px; }
+.loading-bar-bg {
+    background: var(--panel); border-radius: 10px; height: 16px;
+    overflow: hidden; border: 1px solid var(--border); margin-bottom: 10px;
+}
+.loading-bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--gold2), var(--gold));
+    border-radius: 10px; transition: width .4s ease;
+}
+.loading-status { color: var(--muted); font-size: .82rem; }
+
+/* ── Layout ──────────────────────────────── */
+#game-screen { display: flex; flex-direction: column; height: 100vh; }
+
+/* ── Teams row ───────────────────────────── */
+#teams-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 16px;
+    background: linear-gradient(180deg, #0c0c22 0%, var(--bg2) 100%);
+    border-bottom: 2px solid var(--border);
+    flex-shrink: 0;
+}
+#player-side { flex: 1; }
+#enemy-side  { flex: 1; }
+#vs-area {
+    font-size: 2rem; line-height: 1;
+    color: var(--gold); padding: 14px 4px 0;
+    text-shadow: 0 0 16px rgba(255,215,0,.7);
+}
+.team-label {
+    font-size: .75rem; font-weight: bold;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 6px;
+}
+.player-label { color: var(--gold); text-shadow: 0 0 8px rgba(255,215,0,.4); }
+.enemy-label  { color: var(--enemy); text-align: right; text-shadow: 0 0 8px rgba(255,85,51,.4); }
+
+.portraits-row { display: flex; gap: 7px; flex-wrap: wrap; }
+#enemy-side .portraits-row { justify-content: flex-end; }
+
+/* ── Portrait card ───────────────────────── */
+.portrait {
+    position: relative; width: 70px; cursor: pointer;
+    transition: transform .2s;
+}
+.portrait:hover:not(.dead) { transform: translateY(-4px); }
+.portrait.selected         { transform: translateY(-6px); }
+.portrait.dead             { opacity: .35; cursor: default; }
+
+.portrait-icon {
+    width: 62px; height: 62px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.9rem;
+    border: 3px solid var(--border);
+    background: var(--panel);
+    transition: border-color .2s, box-shadow .2s;
+    position: relative; overflow: hidden;
+}
+.portrait.selected .portrait-icon {
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(255,215,0,.7), 0 0 28px rgba(255,215,0,.3);
+}
+.portrait-hp {
+    height: 4px; background: var(--panel);
+    border-radius: 2px; margin-top: 3px; overflow: hidden;
+}
+.portrait-hp-fill { height: 100%; border-radius: 2px; transition: width .4s ease; }
+.p-hp-fill { background: var(--hp); }
+.e-hp-fill { background: var(--enemy); }
+.portrait-name {
+    text-align: center; font-size: .58rem; color: var(--muted);
+    margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── Battle area ─────────────────────────── */
+#battle-area {
+    flex: 1; overflow: hidden; position: relative;
+    background:
+        linear-gradient(to bottom, rgba(8,8,26,.65) 0%, rgba(8,8,26,.88) 100%),
+        url('/static/images/battle-scene.png') center/cover no-repeat;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 16px;
+}
+#battle-log {
+    width: 100%; max-width: 720px; max-height: 130px;
+    overflow: hidden;
+    background: rgba(8,8,26,.88);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px;
+}
+#battle-messages { display: flex; flex-direction: column; gap: 3px; }
+.log-msg { font-size: .82rem; animation: fadeIn .3s ease; }
+.log-msg.dmg    { color: #ff9999; }
+.log-msg.heal   { color: var(--heal); }
+.log-msg.special{ color: var(--gold); }
+.log-msg.system { color: var(--muted); font-style: italic; }
+
+/* ── HUD ─────────────────────────────────── */
+#hud {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 16px;
+    background: linear-gradient(0deg, #0c0c22 0%, var(--bg2) 100%);
+    border-top: 2px solid var(--border);
+    flex-shrink: 0;
+}
+#char-status { flex: 0 0 210px; }
+#char-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+#char-name  { font-weight: bold; font-size: .95rem; color: var(--gold); }
+#char-class { font-size: .7rem; color: var(--muted); }
+
+.bar-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+.bar-label { font-size: .68rem; font-weight: bold; color: var(--muted); width: 20px; }
+.bar-bg {
+    flex: 1; height: 10px; background: var(--panel);
+    border-radius: 5px; overflow: hidden; border: 1px solid var(--border);
+}
+.bar { height: 100%; border-radius: 5px; transition: width .4s ease; }
+.hp-bar { background: linear-gradient(90deg, #115522, var(--hp)); }
+.hp-bar.low { background: linear-gradient(90deg, #661111, var(--hp-low)); animation: pulse 1s infinite; }
+.mp-bar { background: linear-gradient(90deg, #111166, var(--mp)); }
+.bar-val { font-size: .68rem; color: var(--muted); min-width: 48px; text-align: right; }
+
+/* ── Combo ───────────────────────────────── */
+#combo-area { text-align: center; flex: 0 0 90px; }
+.combo-label { font-size: .62rem; color: var(--muted); letter-spacing: 2px; margin-bottom: 4px; }
+#combo-pips { display: flex; gap: 4px; justify-content: center; margin-bottom: 4px; }
+.pip {
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--panel); border: 2px solid var(--border);
+    transition: all .3s;
+}
+.pip.on {
+    background: var(--combo); border-color: var(--combo);
+    box-shadow: 0 0 7px rgba(255,153,0,.8);
+}
+#combo-count { font-size: 1rem; font-weight: bold; color: var(--combo); }
+
+/* ── Action bar ──────────────────────────── */
+#action-bar { display: flex; gap: 8px; flex: 1; justify-content: center; }
+.skill-btn {
+    width: 110px; padding: 8px 6px;
+    background: var(--panel); border: 2px solid var(--border);
+    border-radius: 8px; cursor: pointer;
+    text-align: center; transition: all .2s;
+}
+.skill-btn:hover:not(.off) {
+    border-color: var(--gold); transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255,215,0,.2);
+}
+.skill-btn.on {
+    border-color: var(--gold); background: rgba(255,215,0,.1);
+    box-shadow: 0 0 14px rgba(255,215,0,.35);
+}
+.skill-btn.off { opacity: .4; cursor: not-allowed; }
+.skill-hotkey {
+    font-size: .7rem; font-weight: bold; color: var(--gold);
+    background: rgba(255,215,0,.15); border-radius: 4px;
+    padding: 1px 6px; display: inline-block; margin-bottom: 4px;
+}
+.skill-name {
+    font-size: .73rem; font-weight: bold; color: var(--text);
+    min-height: 28px; display: flex; align-items: center; justify-content: center;
+    line-height: 1.2;
+}
+.skill-mp { font-size: .62rem; color: var(--mp); margin-top: 2px; }
+
+/* ── Turn bar ────────────────────────────── */
+#turn-bar {
+    background: var(--bg); padding: 5px 16px;
+    border-top: 1px solid var(--border); flex-shrink: 0;
+}
+#turn-text {
+    text-align: center; font-size: .8rem;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--gold);
+}
+#turn-text.enemy { color: var(--enemy); }
+
+/* ── Overlays ────────────────────────────── */
+.overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200;
+}
+.overlay-box {
+    text-align: center; padding: 50px 60px;
+    background: var(--panel); border: 2px solid var(--gold);
+    border-radius: 16px; max-width: 380px;
+}
+.overlay-icon { font-size: 4rem; margin-bottom: 12px; }
+.overlay-box h1 { font-size: 2.5rem; color: var(--gold); margin-bottom: 10px; text-shadow: 0 0 24px rgba(255,215,0,.7); }
+.overlay-box p  { font-size: 1.1rem; color: var(--muted); margin-bottom: 24px; }
+.overlay-box button {
+    padding: 12px 40px; background: var(--gold); color: #000;
+    border: none; border-radius: 8px; font-size: 1rem; font-weight: bold;
+    cursor: pointer; transition: all .2s;
+}
+.overlay-box button:hover { background: #fff; transform: scale(1.05); }
+
+/* ── Floating damage numbers ─────────────── */
+.dmg-float {
+    position: fixed; pointer-events: none;
+    font-size: 1.4rem; font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,.8);
+    animation: floatUp 1.4s ease forwards;
+    z-index: 300;
+}
+.dmg-float.phys  { color: #ffffff; }
+.dmg-float.magic { color: #88aaff; }
+.dmg-float.crit  { color: var(--gold); font-size: 1.9rem; }
+.dmg-float.heal  { color: var(--heal); }
+.dmg-float.evade { color: var(--muted); font-size: 1rem; }
+
+/* ── Animations ──────────────────────────── */
+@keyframes fadeIn   { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatUp  { 0% { opacity: 1; transform: translateY(0) scale(1); } 60% { opacity: 1; transform: translateY(-50px) scale(1.15); } 100% { opacity: 0; transform: translateY(-90px) scale(.8); } }
+@keyframes pulse    { 0%,100% { opacity: 1; } 50% { opacity: .65; } }
+@keyframes shake    { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+@keyframes attackPop { 0% { transform: scale(1); } 50% { transform: scale(1.35) translateY(-6px); filter: brightness(2.2); } 100% { transform: scale(1); } }
+@keyframes hitFlash  { 0% { filter: none; } 30% { filter: brightness(4) saturate(0); } 100% { filter: none; } }
+
+.anim-attack { animation: attackPop .55s ease; }
+.anim-hit    { animation: hitFlash  .4s  ease; }
+.anim-shake  { animation: shake     .4s  ease; }
+
+.hidden { display: none !important; }
